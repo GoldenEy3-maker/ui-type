@@ -7,7 +7,10 @@ export function Footer() {
       <div className="flex-1">
         <span className="text-basicL font-medium text-muted/50">©2024</span>
       </div>
-      <Link href="#" target="_blank">
+      <Link
+        href="#"
+        target="_blank"
+        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-ring ring-offset-background focus-visible:ring-offset-2">
         <div className="flex items-center gap-1 leading-none font-medium">
           <p>Влад Кленов</p>
           <Icons.ArrowLink className="text-primary -mt-1" />
@@ -16,7 +19,10 @@ export function Footer() {
           Дизайн и&nbsp;содержание
         </span>
       </Link>
-      <Link href="#" target="_blank">
+      <Link
+        href="#"
+        target="_blank"
+        className="focus:outline-none focus-visible:ring-2 focus-visible:ring-ring ring-offset-background focus-visible:ring-offset-2">
         <div className="flex items-center gap-1 leading-none font-medium">
           <p>Данил Королев</p>
           <Icons.ArrowLink className="text-primary -mt-1" />
