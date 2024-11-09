@@ -15,6 +15,20 @@ export default {
         flow: ["Flow", ...fontFamily.sans],
         aeroport: ["Aeroport", ...fontFamily.sans],
       },
+      fontSize: {
+        // 28px
+        h2: ["1.75rem", "1.36"],
+        // 24px
+        h3: ["1.5rem", "1.36"],
+        // 24px
+        h4: ["1.5rem", "1"],
+        // 16px
+        basicL: ["1rem", "1.3"],
+        // 14px
+        basicM: ["0.875rem", "1.2"],
+        // 12px
+        basicS: ["0.75rem", "1.36"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
