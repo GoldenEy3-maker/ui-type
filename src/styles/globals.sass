@@ -42,3 +42,8 @@
 @layer utilities
   .main-container
     display: grid
+    grid-template-columns: utils.calc-clamp(1rem, 3rem, 640, 1536) [main-start] repeat(24, 1fr) [main-end] utils.calc-clamp(1rem, 3rem, 640, 1536)
+  .max-container
+    width: 100%
+    max-width: 120rem
+    margin-inline: auto

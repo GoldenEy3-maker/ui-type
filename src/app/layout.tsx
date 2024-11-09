@@ -65,7 +65,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${flow.variable} ${aeroport.variable} antialiased`}>
-        {children}
+        <div className="main-container max-conatiner">{children}</div>
       </body>
     </html>
   );
