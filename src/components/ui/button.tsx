@@ -1,11 +1,14 @@
+"use client";
+
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+import { useRippleEffect } from "@/hooks/ripple-effect";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-[1.25rem] text-base font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0",
+  "relative overflow-hidden inline-flex items-center justify-center gap-3 whitespace-nowrap rounded-[1.25rem] text-base font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -40,12 +43,23 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    { className, variant, size, asChild = false, onPointerDown, ...props },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
+    const rippleEffectEvent = useRippleEffect();
+
+    function pointerDownHandler(event: React.PointerEvent<HTMLButtonElement>) {
+      rippleEffectEvent(event);
+      onPointerDown?.(event);
+    }
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        onPointerDown={pointerDownHandler}
         {...props}
       />
     );
