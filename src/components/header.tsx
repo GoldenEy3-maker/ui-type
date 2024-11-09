@@ -25,9 +25,11 @@ export function Header() {
         <Icons.AnalyticsGraphBarHorizontal className="text-primary" />
         <span>Результаты</span>
       </Button>
-      <Button type="button" variant="outline">
-        <Icons.ListsNumbers className="text-primary" />
-        <span>Пройти тест</span>
+      <Button type="button" variant="outline" asChild>
+        <Link href={RouterMap.Question + "1"}>
+          <Icons.ListsNumbers className="text-primary" />
+          <span>Пройти тест</span>
+        </Link>
       </Button>
     </header>
   );
