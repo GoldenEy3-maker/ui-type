@@ -97,4 +97,22 @@ export const Icons = {
       </defs>
     </svg>
   ),
+  ArrowLink: (props: React.ComponentProps<"svg">) => (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}>
+      <path
+        d="M6.31338 3.45873L12.1716 3.2574L11.9702 9.11558M3.68636 11.7428L12.0868 3.3423"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeMiterlimit="10"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
 };

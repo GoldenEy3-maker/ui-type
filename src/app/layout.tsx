@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/styles/globals.sass";
 import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 const flow = localFont({
   src: [
@@ -69,6 +70,7 @@ export default function RootLayout({
         <div className="main-container max-conatiner py-6 min-h-svh grid-rows-[auto_1fr_auto]">
           <Header />
           {children}
+          <Footer />
         </div>
       </body>
     </html>
