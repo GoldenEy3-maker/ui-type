@@ -3,11 +3,16 @@
 import { GetQuestionByIdResponse, QuestionModel } from "@/lib/models";
 import { getBaseUrl } from "@/lib/utils";
 
-export async function getQuestionById(id: string) {
+export async function getQuestionByIndex(index: string) {
   try {
-    const res = await fetch(`${getBaseUrl()}/api/questions?id=${id}`);
+    const res = await fetch(`${getBaseUrl()}/api/questions?index=${index}`);
     const data = GetQuestionByIdResponse.parse(await res.json());
-    return { data: QuestionModel.parse(data.question) };
+    return {
+      data: {
+        question: QuestionModel.parse(data.question),
+        length: data.length,
+      },
+    };
   } catch (error) {
     return {
       error,

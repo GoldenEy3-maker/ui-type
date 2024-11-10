@@ -13,5 +13,6 @@ export const QuestionModel = z.object({
 });
 
 export const GetQuestionByIdResponse = z.object({
+  length: z.number(),
   question: z.custom<typeof QuestionModel>(),
 });

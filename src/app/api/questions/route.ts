@@ -277,15 +277,16 @@ const DATA: QuestionData[] = [
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const id = searchParams.get("id");
+  const index = searchParams.get("index");
 
-  if (!id) {
-    return new Response("Отсутствует обязательный query параметр id!", {
+  if (!index) {
+    return new Response("Отсутствует обязательный query параметр index!", {
       status: 400,
     });
   }
 
   return Response.json({
-    question: DATA.find((question) => question.id === id),
+    length: DATA.length,
+    question: DATA[+index],
   });
 }
