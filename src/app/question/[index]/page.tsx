@@ -26,7 +26,8 @@ export default async function QuestionPage({
       <h2 className="text-h2 col-[span_19]">{questionData.question}</h2>
       <OptionsList
         options={questionData.options}
-        nextIndex={index < questionsLength ? (index + 1).toString() : undefined}
+        currentIndex={index}
+        isLastQuestion={index === questionsLength}
       />
     </div>
   );
