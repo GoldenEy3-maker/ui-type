@@ -12,7 +12,10 @@ export default async function QuestionPage({
   const { data, error } = await getQuestionByIndex((index - 1).toString());
 
   // !TODO: add error handler
-  if (!data || error) return null;
+  if (!data || error) {
+    console.error(error);
+    return null;
+  }
 
   const { length: questionsLength, question: questionData } = data;
 
