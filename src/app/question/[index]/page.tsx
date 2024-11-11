@@ -11,6 +11,8 @@ export default async function QuestionPage({
   // URL index starts from 1 but route fetches data by default index from 0
   const { data, error } = await getQuestionByIndex((index - 1).toString());
 
+  console.log(data);
+
   // !TODO: add error handler
   if (!data || error) {
     console.error(error);
