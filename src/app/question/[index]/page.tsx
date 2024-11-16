@@ -1,3 +1,4 @@
+import { Stepper } from "@/components/stepper";
 import { getQuestionByIndex } from "./actions";
 import { OptionsList } from "@/components/options-list";
 
@@ -8,32 +9,27 @@ export default async function QuestionPage({
 }) {
   const index = +(await params).index;
 
-  // URL index starts from 1 but route fetches data by default index from 0
-  const { data, error } = await getQuestionByIndex((index - 1).toString());
-
-  console.log(data);
-
-  // !TODO: add error handler
-  if (!data || error) {
-    console.error(error);
-    return null;
-  }
-
-  const { length: questionsLength, question: questionData } = data;
+  // URL index starts from 1
+  const { length: questionsLength, data } = await getQuestionByIndex(
+    (index - 1).toString()
+  );
 
   return (
-    <div className="grid auto-rows-max items-baseline grid-cols-subgrid col-[main] place-content-center py-20">
-      <span className="font-flow text-h2 text-primary col-span-1">
-        {new Intl.NumberFormat(undefined, {
-          minimumIntegerDigits: 2,
-        }).format(index)}
-      </span>
-      <h2 className="text-h2 col-[span_19]">{questionData.question}</h2>
-      <OptionsList
-        options={questionData.options}
-        currentIndex={index}
-        isLastQuestion={index === questionsLength}
-      />
-    </div>
+    <main className="grid grid-rows-[auto_1fr] auto-rows-max grid-cols-subgrid col-[main]">
+      <Stepper currentIndex={index} length={questionsLength} />
+      <div className="grid auto-rows-max items-baseline grid-cols-subgrid col-[main] place-content-center py-20">
+        <span className="font-flow text-h2 text-primary col-span-1">
+          {new Intl.NumberFormat(undefined, {
+            minimumIntegerDigits: 2,
+          }).format(index)}
+        </span>
+        <h2 className="text-h2 col-[span_19]">{data.question}</h2>
+        <OptionsList
+          options={data.options}
+          currentIndex={index}
+          isLastQuestion={index === questionsLength}
+        />
+      </div>
+    </main>
   );
 }
