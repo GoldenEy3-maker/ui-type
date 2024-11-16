@@ -11,8 +11,3 @@ export const QuestionModel = z.object({
   question: z.string(),
   options: z.array(z.custom<z.infer<typeof OptionModel>>()),
 });
-
-export const GetQuestionByIdResponse = z.object({
-  length: z.number(),
-  question: z.custom<typeof QuestionModel>(),
-});
