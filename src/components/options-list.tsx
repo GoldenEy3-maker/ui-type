@@ -50,7 +50,7 @@ export function OptionsList({
           autoFocus={index === 0}
           key={option.value}
           value={option.value}
-          className="[counter-increment:question_1] justify-start aria-checked:bg-primary/30 aria-checked:before:bg-primary before:content-[counter(question)] before:w-6 before:h-6 before:rounded-sm before:text-primary-foreground before:border-muted/50 before:border before:bg-primary/30 gap-x-4 w-auto h-auto aspect-auto flex items-center border-muted/50 border rounded-xl px-4 py-3"
+          className="[counter-increment:question_1] justify-start aria-checked:bg-primary/30 aria-checked:before:bg-primary before:content-[counter(question)] before:w-6 before:h-6 before:rounded-sm before:inline-flex before:items-center before:justify-center before:text-primary-foreground before:border-muted/50 before:border before:bg-primary/30 gap-x-4 w-auto h-auto aspect-auto flex items-center border-muted/50 border rounded-xl px-4 py-3"
           onClick={() => optionChangeHandler(option.value)}
           aria-checked={
             questionStore.progress[currentIndex - 1] === option.value
