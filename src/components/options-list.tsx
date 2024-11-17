@@ -6,24 +6,26 @@ import { PsychoTypeMap, RouterMap } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import { Button } from "./ui/button";
-import { useQuestionStore } from "@/store/questions";
+import { useTestStorage } from "@/store/test";
 import { useStore } from "zustand";
 
 type OptionsListProps = {
   options: z.infer<typeof OptionModel>[];
   currentIndex: number;
-  isLastQuestion: boolean;
+  questionsLength: number;
 };
 
 export function OptionsList({
   options,
   currentIndex,
-  isLastQuestion,
+  questionsLength,
 }: OptionsListProps) {
   const timeoutRef = useRef<NodeJS.Timeout>();
 
   const router = useRouter();
-  const questionStore = useStore(useQuestionStore);
+  const testStore = useStore(useTestStorage);
+
+  const isLastQuestion = currentIndex === questionsLength;
 
   function optionChangeHandler(value: PsychoTypeMap) {
     if (timeoutRef.current) {
@@ -37,9 +39,11 @@ export function OptionsList({
           ? RouterMap.Summary
           : RouterMap.Question + (currentIndex + 1)
       );
-    }, 1000);
+    }, 750);
 
-    questionStore.updateProgress(currentIndex - 1, value);
+    testStore.setProgress(currentIndex - 1, value);
+
+    if (isLastQuestion) testStore.setComplete(true);
   }
 
   return (
@@ -52,9 +56,7 @@ export function OptionsList({
           value={option.value}
           className="[counter-increment:question_1] justify-start aria-checked:bg-primary/30 aria-checked:before:bg-primary before:content-[counter(question)] before:w-6 before:h-6 before:rounded-sm before:inline-flex before:items-center before:justify-center before:text-primary-foreground before:border-muted/50 before:border before:bg-primary/30 gap-x-4 w-auto h-auto aspect-auto flex items-center border-muted/50 border rounded-xl px-4 py-3"
           onClick={() => optionChangeHandler(option.value)}
-          aria-checked={
-            questionStore.progress[currentIndex - 1] === option.value
-          }>
+          aria-checked={testStore.progress[currentIndex - 1] === option.value}>
           <p className="text-[1.375rem] leading-snug">{option.text}</p>
         </Button>
       ))}

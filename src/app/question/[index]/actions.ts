@@ -279,6 +279,6 @@ const DATA: QuestionData[] = [
 export async function getQuestionByIndex(index: string) {
   return {
     data: DATA[+index],
-    length: DATA.length,
+    questionsLength: DATA.length,
   };
 }

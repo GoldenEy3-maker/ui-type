@@ -10,7 +10,7 @@ export default async function QuestionPage({
   const index = +(await params).index;
 
   // URL index starts from 1
-  const { length: questionsLength, data } = await getQuestionByIndex(
+  const { questionsLength, data } = await getQuestionByIndex(
     (index - 1).toString()
   );
 
@@ -27,7 +27,7 @@ export default async function QuestionPage({
         <OptionsList
           options={data.options}
           currentIndex={index}
-          isLastQuestion={index === questionsLength}
+          questionsLength={questionsLength}
         />
       </div>
     </main>
