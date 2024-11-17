@@ -66,7 +66,9 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="UItype" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={`${flow.variable} ${aeroport.variable} antialiased`}>
+      <body
+        suppressHydrationWarning
+        className={`${flow.variable} ${aeroport.variable} antialiased`}>
         <div className="main-container max-conatiner py-6 min-h-svh grid-rows-[auto_1fr_auto]">
           <Header />
           {children}
