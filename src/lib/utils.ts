@@ -12,7 +12,7 @@ export function getDominantPsychoType(
   const progressCounter = progress.reduce<Record<string, number>>(
     (acc, curr) => {
       if (acc[curr] !== undefined) acc[curr] += 1;
-      else acc[curr] = 0;
+      else acc[curr] = 1;
 
       return acc;
     },
