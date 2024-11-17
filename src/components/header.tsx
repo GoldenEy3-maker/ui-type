@@ -1,11 +1,17 @@
+"use client";
+
 import { RouterMap } from "@/lib/constants";
 import Link from "next/link";
 import { Icons } from "./ui/icons";
 import { Button } from "./ui/button";
+import { usePathname } from "next/navigation";
 
 export function Header() {
+  const pathname = usePathname();
+  const isQuestionPage = pathname.includes(RouterMap.Question);
+
   return (
-    <header className="flex items-center col-[main] gap-3 py-4 pl-6 pr-3 bg-secondary rounded-3xl">
+    <header className="flex items-center col-[main] min-h-[4.5rem] gap-3 py-3 pl-6 pr-3 bg-secondary rounded-3xl">
       <div className="flex-1 flex items-start">
         <Link
           href={RouterMap.Home}
@@ -21,16 +27,22 @@ export function Header() {
           </div>
         </Link>
       </div>
-      <Button type="button" variant="ghost">
-        <Icons.AnalyticsGraphBarHorizontal className="text-primary" />
-        <span>Результаты</span>
-      </Button>
-      <Button type="button" variant="outline" asChild>
-        <Link href={RouterMap.Question + "1"}>
-          <Icons.ListsNumbers className="text-primary" />
-          <span>Пройти тест</span>
-        </Link>
-      </Button>
+      {!isQuestionPage ? (
+        <>
+          <Button type="button" variant="ghost" asChild>
+            <Link href={RouterMap.Summary}>
+              <Icons.AnalyticsGraphBarHorizontal className="text-primary" />
+              <span>Результаты</span>
+            </Link>
+          </Button>
+          <Button type="button" variant="outline" asChild>
+            <Link href={RouterMap.Question + 1}>
+              <Icons.ListsNumbers className="text-primary" />
+              <span>Пройти тест</span>
+            </Link>
+          </Button>
+        </>
+      ) : null}
     </header>
   );
 }
