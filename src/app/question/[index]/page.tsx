@@ -16,7 +16,7 @@ export default async function QuestionPage({
 
   return (
     <main className="grid grid-rows-[auto_1fr] auto-rows-max grid-cols-subgrid col-[main]">
-      <Stepper currentIndex={index} length={questionsLength} />
+      <Stepper currentIndex={index} length={questionsLength} className="mt-6" />
       <div className="grid auto-rows-max items-baseline grid-cols-subgrid col-[main] place-content-center py-20">
         <span className="font-flow text-h2 text-primary col-span-1">
           {new Intl.NumberFormat(undefined, {
