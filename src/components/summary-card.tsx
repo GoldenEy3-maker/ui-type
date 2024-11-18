@@ -131,7 +131,7 @@ const DATA: Record<
         и&nbsp;энергичные, любят брать инициативу и&nbsp;действовать решительно
       </>
     ),
-    icon: <Icons.ButtonHeroIllustration />,
+    icon: <Icons.ButtonIllustration />,
     features: [
       {
         title: "Энергичность",
