@@ -5,7 +5,9 @@ export function Footer() {
   return (
     <footer className="col-[main] flex items-center gap-x-8">
       <div className="flex-1">
-        <span className="text-basicL font-medium text-muted/50">©2024</span>
+        <span className="text-basicL font-medium text-muted/50">
+          ©{new Date().getFullYear()}
+        </span>
       </div>
       <Link
         href="#"

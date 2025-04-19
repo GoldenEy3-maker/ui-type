@@ -2,14 +2,14 @@ import { PsychoTypeMap } from "@/lib/constants";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type TestStorage = {
+interface TestStore {
   progress: PsychoTypeMap[];
   isComplete: boolean;
   setProgress: (index: number, value: PsychoTypeMap) => void;
   setComplete: (value: boolean) => void;
-};
+}
 
-export const useTestStorage = create<TestStorage>()(
+export const useTestStore = create<TestStore>()(
   persist(
     (set, get) => ({
       progress: [],

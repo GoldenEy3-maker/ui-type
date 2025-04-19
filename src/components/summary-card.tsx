@@ -5,8 +5,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { Icons } from "./ui/icons";
 import { cn, getDominantPsychoType } from "@/lib/utils";
-import { useStore } from "zustand";
-import { useTestStorage } from "@/store/test";
+import { useTestStore } from "@/store/test";
 
 type SummaryCardProps = {} & React.ComponentProps<"div">;
 
@@ -192,21 +191,19 @@ const DATA: Record<
 };
 
 export function SummaryCard({ className, ...props }: SummaryCardProps) {
-  const testStore = useStore(useTestStorage);
+  const { isComplete, progress } = useTestStore();
 
-  const [dominantPsychoType, percents] = getDominantPsychoType(
-    testStore.progress
-  );
+  const [dominantPsychoType, percents] = getDominantPsychoType(progress);
 
   return (
     <div
       className={cn(
         "bg-card rounded-[1.25rem] auto-rows-max grid p-9",
-        { "place-content-center place-items-center": !testStore.isComplete },
+        { "place-content-center place-items-center": !isComplete },
         className
       )}
       {...props}>
-      {testStore.isComplete ? (
+      {isComplete ? (
         <div>
           <div className="flex flex-col items-center">
             <h4 className="text-h4 font-flow text-center">
@@ -219,23 +216,25 @@ export function SummaryCard({ className, ...props }: SummaryCardProps) {
           </div>
           <div className="mt-8">
             <div className="flex items-center justify-between gap-x-4">
-              <p className="font-medium">{DATA[dominantPsychoType].title}</p>
-              <span className="text-xs text-muted/50">ваш юайпсихотип</span>
+              <p className="font-medium text-lg">
+                {DATA[dominantPsychoType].title}
+              </p>
+              <span className="text-sm text-muted/50">
+                ваш&nbsp;юайпсихотип
+              </span>
             </div>
-            <p className="text-sm mt-2">
-              {DATA[dominantPsychoType].description}
-            </p>
+            <p className="mt-2">{DATA[dominantPsychoType].description}</p>
           </div>
           <div className="mt-6">
-            <p className="font-medium">Сильные стороны</p>
+            <p className="font-medium text-lg">Сильные стороны</p>
             <ul className="mt-2 space-y-2">
               {DATA[dominantPsychoType].features.map((feature, index) => (
                 <li
                   key={index}
                   className="grid grid-cols-[auto_1fr] items-baseline gap-x-2 grid-rows-[auto_auto]">
                   <Icons.Bullet className="text-primary row-span-2" />
-                  <p className="text-sm text-primary">{feature.title}</p>
-                  <p className="text-xs mt-1">{feature.description}</p>
+                  <p className="text-primary">{feature.title}</p>
+                  <p className="mt-1">{feature.description}</p>
                 </li>
               ))}
             </ul>
@@ -246,7 +245,7 @@ export function SummaryCard({ className, ...props }: SummaryCardProps) {
           <Icons.IllustrationAnatoly className="text-primary/30" />
           <div className="grid place-items-center mt-[5rem]">
             <h3 className="text-h3 text-primary">Самое время узнать себя</h3>
-            <p className="mt-1 text-sm">
+            <p className="mt-1">
               Вы&nbsp;ещё не&nbsp;прошли тест, это займет около 5&nbsp;минут
             </p>
             <Button asChild className="mt-6">
